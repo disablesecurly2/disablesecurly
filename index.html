@@ -113,7 +113,7 @@
                         // Reset form fields
                         document.getElementById("submitForm").reset();
                         // Display error message with red color
-                        document.getElementById("output").innerHTML = "Error accessing securely API. Please Check Chrome Version And try again. This script won't work above v119 due to chrome patching API calls to extensions. Please update to v119 or above.";
+                        document.getElementById("output").innerHTML = "Error accessing securely API. Please Check Chrome Version And try again. This script won't work above v119 due to chrome patching API calls to extensions. Please downgrade to v119 or below.";
                         document.getElementById("output").classList.add('red');
                     }, 1000); // Delay for 1 second after completion
                 }
