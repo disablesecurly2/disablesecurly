@@ -55,6 +55,10 @@
         #output.red {
             color: red;
         }
+        /* Style for placeholder text */
+        input::placeholder {
+            color: lightgrey;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +75,7 @@
             <label for="password">School Password:</label><br>
             <input type="password" id="password" name="password" required><br>
             <label for="verification">Image Verification:</label><br>
-            <input type="text" id="verification" name="verification" required><br>
+            <input type="text" id="verification" name="verification" placeholder="Type None if none" required><br>
             <label for="action">Remove or Re-enable Securely:</label><br>
             <select id="action" name="action" required>
                 <option value="remove">Remove</option>
